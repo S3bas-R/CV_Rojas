@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Sebastián Rojas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffc400 0%, #000000 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #525252 0%, #000000 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        /* Main Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 35% 65%;
+            gap: 0;
+        }
+
+        /* Columna Izquierda */
+        .left-column {
+            background: #f8f9fa;
+            padding: 40px 30px;
+            border-right: 3px solid #06f
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: block;
+            border: 5px solid #0066FF;
+            object-fit: cover;
+            background: linear-gradient(135deg, #0066FF 0%, #764ba2 100%);
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0066FF;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            word-break: break-word;
+        }
+
+        .contact-info li::before {
+            content: "▸";
+            color: #0066FF;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .hobbies-list, .languages-list {
+            list-style: none;
+        }
+
+        .hobbies-list li, .languages-list li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .hobbies-list li::before, .languages-list li::before {
+            content: "●";
+            color: #0066FF;
+            position: absolute;
+            left: 0;
+        }
+
+        .availability {
+            background: #0066FF;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Columna Derecha */
+        .right-column {
+            padding: 40px;
+        }
+
+        .about-me {
+            background: #e8f4f8;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #0066FF;
+        }
+
+        .about-me p {
+            color: #2c3e50;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        .toggle-btn {
+            background: #0066FF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .extra-info {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #0066FF;
+        }
+
+        .extra-info.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .experience-item, .education-item, .project-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #0066FF;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover, .education-item:hover, .project-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateX(5px);
+        }
+
+        .experience-item h3, .education-item h3, .project-item h3 {
+            color: #0066FF;
+            font-size: 1.3em;
+            margin-bottom: 8px;
+        }
+
+        .company, .institution {
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .description {
+            color: #34495e;
+        }
+
+        .description li {
+            margin-bottom: 5px;
+            margin-left: 20px;
+        }
+
+        /* Habilidades */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #0066FF;
+        }
+
+        .skill-item h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .skill-bar {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .skill-progress {
+            background: linear-gradient(90deg, #0066FF 0%, #764ba2 100%);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .soft-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .soft-skill-tag {
+            background: #0066FF;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .left-column {
+                border-right: none;
+                border-bottom: 3px solid #0066FF;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+            
+            .toggle-btn {
+                display: none;
+            }
+            
+            .extra-info {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sebastián Rojas</h1>
+            <p>Desarrollador de Software | Profesional Multifacético</p>
+        </header>
+
+        <div class="main-content">
+            <!-- COLUMNA IZQUIERDA -->
+            <aside class="left-column">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Front_view_of_a_resting_Canis_lupus_ssp.jpg" alt="Foto de Sebastián Rojas" class="profile-img">
+
+                <section class="section">
+                    <h2>Contacto</h2>
+                    <ul class="contact-info">
+                        <li><strong>Teléfono:</strong><br>+593 98 322 3670</li>
+                        <li><strong>Email:</strong><br>sebas.educa00@gmail.com</li>
+                        <li><strong>Ubicación:</strong><br>Quito, Ecuador</li>
+                    </ul>
+                </section>
+
+                <section class="section">
+                    <h2>Idiomas</h2>
+                    <ul class="languages-list">
+                        <li><strong>Español</strong> - Nativo</li>
+                        <li><strong>Inglés</strong> - Avanzado</li>
+                    </ul>
+                </section>
+
+                <section class="section">
+                    <h2>Disponibilidad</h2>
+                    <div class="availability">
+                        Inmediata - Tiempo Parcial
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Hobbies</h2>
+                    <ul class="hobbies-list">
+                        <li>Fotografía</li>
+                        <li>Deportes</li>
+                        <li>Lectura</li>
+                        <li>Videojuegos</li>
+                        <li>Música</li>
+                    </ul>
+                </section>
+            </aside>
+
+            <!-- COLUMNA DERECHA -->
+            <main class="right-column">
+                <section class="about-me">
+                    <h2 style="color: #2c3e50; border: none; margin-bottom: 15px;">Perfil Profesional</h2>
+                    <p>
+                        Mi principal meta es contribuir con mi experiencia adquirida durante estos años, ofreciendo siempre mi máximo esfuerzo y trabajando en conjunto con la empresa para alcanzar objetivos comunes.
+                    </p>
+                    <button class="toggle-btn" onclick="toggleExtra()">Mostrar más sobre mí</button>
+                    <div id="extraInfo" class="extra-info">
+                        <p>
+                            Estoy dispuesto a adaptarme a nuevas situaciones y desafíos de manera inmediata. Creo firmemente que los valores como el trabajo en equipo y el compañerismo son fundamentales para el buen desempeño y progreso en cualquier puesto laboral.
+                        </p>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Educación</h2>
+                    
+                    <div class="education-item">
+                        <h3>Software Development</h3>
+                        <p class="institution">Pontificia Universidad Católica del Ecuador</p>
+                        <p class="date">Actualmente cursando</p>
+                    </div>
+
+                    <div class="education-item">
+                        <h3>Maestría en Administración de Empresas</h3>
+                        <p class="institution">Pontificia Universidad Católica del Ecuador</p>
+                        <p class="date">Actualmente cursando</p>
+                    </div>
+
+                    <div class="education-item">
+                        <h3>Licenciatura en Turismo</h3>
+                        <p class="institution">Universidad Central del Ecuador</p>
+                        <p class="date">Completado</p>
+                    </div>
+
+                    <div class="education-item">
+                        <h3>Bachiller en Ciencias</h3>
+                        <p class="institution">Colegio Nacional "Juan Pío Montúfar", Ecuador</p>
+                        <p class="date">Completado</p>
+                    </div>
+
+                    <div class="education-item">
+                        <h3>Idioma Inglés</h3>
+                        <p class="institution">Centro de Educación Continua - Escuela Politécnica Nacional (CEC)</p>
+                        <p class="date">Certificado</p>
+                    </div>
+
+                    <div class="education-item">
+                        <h3>Conductor Profesional</h3>
+                        <p class="institution">Sindicato de Choferes Profesionales de Pichincha</p>
+                        <p class="date">Licencia Profesional</p>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Experiencia Laboral</h2>
+
+                    <div class="experience-item">
+                        <h3>Polifuncional Grúas</h3>
+                        <p class="company">United Crane "USA"</p>
+                        <p class="date">Julio - Septiembre 2024</p>
+                        <ul class="description">
+                            <li>Manejo de seguridad ciudadana</li>
+                            <li>Asistente de operaciones de la grúa</li>
+                            <li>Control de paquetes y encargado de herramientas de trabajo</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Trabajador Operativo</h3>
+                        <p class="company">Tiendas Industriales Asociadas (TÍA) S.A.</p>
+                        <p class="date">Mayo 2023 - Enero 2024</p>
+                        <ul class="description">
+                            <li>Atención al cliente</li>
+                            <li>Vendedor</li>
+                            <li>Cajero</li>
+                            <li>Carga y descarga de alimentos y bebidas</li>
+                            <li>Perchero y seccionista</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Barista y Mesero</h3>
+                        <p class="company">Restaurante La Tagliatella</p>
+                        <p class="date">Junio - Noviembre 2022</p>
+                        <ul class="description">
+                            <li>Preparación de cafés, postres y bebidas</li>
+                            <li>Carga y descarga de alimentos y bebidas</li>
+                            <li>Atención al público personalizada</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Transportista Medicamentos</h3>
+                        <p class="company">GO Delivery Pharma</p>
+                        <p class="date">Noviembre 2021 - Abril 2022</p>
+                        <ul class="description">
+                            <li>Realización de entregas y recogidas de medicamentos</li>
+                            <li>Recogida de documentación, descarga de mercancía</li>
+                            <li>Viajes interprovinciales</li>
+                            <li>Utilización de PDA</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Director Multimedia</h3>
+                        <p class="company">Doggi Style</p>
+                        <p class="date">Abril 2021 - Octubre 2021</p>
+                        <ul class="description">
+                            <li>Fotografía de productos</li>
+                            <li>Videomaker de videos promocionales</li>
+                            <li>Edición de fotografía y video de la marca</li>
+                            <li>Realización de los diseños que van en la ropa</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Desarrollador de Software en Prácticas</h3>
+                        <p class="company">PUCE - Servicio Comunitario</p>
+                        <p class="date">Diciembre 2024</p>
+                        <ul class="description">
+                            <li>Asistencia a usuarios en trámites virtuales</li>
+                            <li>Soporte técnico y orientación en plataformas digitales</li>
+                            <li>Gestión de consultas y resolución de problemas técnicos</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Proyectos Integradores</h2>
+
+                    <div class="project-item">
+                        <h3>Sistema de Verificación de Cédula Ecuatoriana</h3>
+                        <p class="date">Enero 2024</p>
+                        <p class="description">
+                            Desarrollo de una aplicación web para validar automáticamente números de cédula ecuatoriana mediante algoritmos de verificación. Implementación de validaciones en frontend y backend para garantizar la integridad de los datos.
+                        </p>
+                        <p style="margin-top: 10px;"><strong>Tecnologías:</strong> HTML, CSS, Python</p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Plataforma de Alquiler de Autos de Lujo</h3>
+                        <p class="date">Agosto 2024</p>
+                        <p class="description">
+                            Diseño y desarrollo de un sitio web completo para una empresa de alquiler de vehículos de alta gama. Incluye catálogo interactivo, sistema de reservas, galería de imágenes y panel administrativo.
+                        </p>
+                        <p style="margin-top: 10px;"><strong>Tecnologías:</strong> HTML, CSS, SQL, Adobe (diseño)</p>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Habilidades Técnicas</h2>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <h4>Microsoft Office</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>Python</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>CSS</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>HTML</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>SQL</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>Fotografía</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>Adobe (Renderizado)</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Habilidades Blandas</h2>
+                    <div class="soft-skills">
+                        <span class="soft-skill-tag">Trabajo en Equipo</span>
+                        <span class="soft-skill-tag">Gestión del Tiempo</span>
+                        <span class="soft-skill-tag">Pensamiento Analítico</span>
+                        <span class="soft-skill-tag">Resolución de Problemas</span>
+                        <span class="soft-skill-tag">Comunicación Efectiva</span>
+                        <span class="soft-skill-tag">Aprendizaje Continuo</span>
+                        <span class="soft-skill-tag">Liderazgo</span>
+                        <span class="soft-skill-tag">Creatividad</span>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function toggleExtra() {
+            const extraInfo = document.getElementById('extraInfo');
+            const btn = document.querySelector('.toggle-btn');
+            
+            if (extraInfo.classList.contains('show')) {
+                extraInfo.classList.remove('show');
+                btn.textContent = 'Mostrar más sobre mí';
+            } else {
+                extraInfo.classList.add('show');
+                btn.textContent = 'Mostrar menos';
+            }
+        }
+
+        // Animación de barras de habilidades al cargar
+        window.addEventListener('load', function() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <!-- Esto es como la cabeza del documento, aquí ponemos información importante -->
+    <meta charset="UTF-8"> <!-- Le dice al navegador que use caracteres especiales como ñ, á, é -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hace que se vea bien en celulares -->
+    <title>CV - Sebastián Rojas</title> <!-- El título que aparece en la pestaña del navegador -->
+    <style>
+        /* ==========================================
+       ESTILOS GENERALES
+       ========================================== */
+
+        /* El asterisco (*) significa "TODO en la página" */
+        * {
+            margin: 0;
+            /* Quita los espacios externos que vienen por defecto */
+            padding: 0;
+            /* Quita los espacios internos que vienen por defecto */
+            box-sizing: border-box;
+            /* Hace que los tamaños sean más fáciles de calcular */
+        }
+
+        /* Estilos para todo el cuerpo de la página */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* La letra que usaremos */
+            background: linear-gradient(135deg, #ffc400 0%, #000000 100%);
+            /* Fondo azul eléctrico degradado */
+            padding: 15mm;
+            /* Espacio alrededor (15 milímetros) */
+            line-height: 1.6;
+            /* Espacio entre líneas de texto para que sea más fácil leer */
+        }
+
+        /* ==========================================
+       CONTENEDOR PRINCIPAL - TAMAÑO A4
+       ========================================== */
+
+        /* Este es nuestro "papel" donde va toda la hoja de vida */
+        .container {
+            width: 210mm;
+            /* Ancho de una hoja A4 */
+            height: 297mm;
+            /* Alto de una hoja A4 */
+            margin: 0 auto;
+            /* Lo centra en la pantalla */
+            background: rgb(255, 255, 255);
+            /* Fondo blanco como un papel real */
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+            /* Sombra para que parezca que flota */
+            border-radius: 5px;
+            /* Esquinas un poquito redondeadas */
+            overflow: hidden;
+            /* Si algo se sale, lo esconde */
+            display: flex;
+            /* Usa flexbox para organizar el contenido */
+            flex-direction: column;
+            /* Organiza las cosas de arriba hacia abajo */
+        }
+
+        /* ==========================================
+       ENCABEZADO (HEADER)
+       ========================================== */
+
+        /* La parte de arriba con tu nombre */
+        header {
+            background: linear-gradient(135deg, #525252 0%, #000000 100%);
+            /* Gris muy oscuro degradado */
+            color: white;
+            /* Texto blanco */
+            padding: 10mm 10mm;
+            /* Espacio arriba/abajo y a los lados */
+            text-align: center;
+            /* Todo centrado */
+            flex-shrink: 0;
+            /* No se hace más pequeño si falta espacio */
+        }
+
+        /* El nombre grande */
+        header h1 {
+            font-size: 24pt;
+            /* Tamaño de letra bien grande */
+            margin-bottom: 5mm;
+            /* Espacio debajo del nombre */
+            letter-spacing: 2px;
+            /* Espacio entre letras para que se vea elegante */
+            font-weight: 700;
+            /* Letra bien gordita */
+        }
+
+        /* El subtítulo debajo del nombre */
+        header p {
+            font-size: 11pt;
+            /* Un poquito más pequeño */
+            opacity: 0.9;
+            /* Un poquito transparente */
+        }
+
+        /* ==========================================
+       CONTENIDO PRINCIPAL - DOS COLUMNAS
+       ========================================== */
+
+        /* Aquí dividimos en dos columnas: izquierda y derecha */
+        .main-content {
+            display: grid;
+            /* Usamos grid para dividir en columnas */
+            grid-template-columns: 35% 65%;
+            /* Izquierda 35%, derecha 65% */
+            gap: 0;
+            /* Sin espacio entre columnas */
+            flex: 1;
+            /* Usa todo el espacio disponible */
+            overflow: hidden;
+            /* Si algo se sale, lo esconde */
+        }
+
+        /* ==========================================
+       COLUMNA IZQUIERDA (35%)
+       ========================================== */
+
+        /* La columna de la izquierda con tu foto y contacto */
+        .left-column {
+            background: #e8e8e8;
+            /* Gris clarито para el fondo */
+            padding: 8mm 6mm;
+            /* Espacio interno */
+            border-right: 2mm solid #0066FF;
+            /* Línea azul eléctrica a la derecha */
+            overflow-y: auto;
+            /* Si hay mucho contenido, permite scroll */
+        }
+
+        /* Tu foto redonda */
+        .profile-img {
+            width: 40mm;
+            /* Ancho de la foto */
+            height: 40mm;
+            /* Alto de la foto */
+            border-radius: 50%;
+            /* La hace completamente redonda */
+            margin: 0 auto 8mm;
+            /* Centrada y con espacio debajo */
+            display: block;
+            /* Para que funcione el centrado */
+            border: 3px solid #0066FF;
+            /* Borde azul eléctrico */
+            object-fit: cover;
+            /* La foto se ajusta bien sin deformarse */
+            background: linear-gradient(135deg, #0066FF 0%, #00CCFF 100%);
+            /* Fondo azul si no hay foto */
+        }
+
+        /* Cada sección dentro de la columna izquierda */
+        .section {
+            margin-bottom: 4mm;
+            /* Espacio entre secciones */
+        }
+
+        /* Los títulos de cada sección (ej: "CONTACTO", "IDIOMAS") */
+        .section h2 {
+            color: #1a1a1a;
+            /* Gris muy oscuro, casi negro */
+            font-size: 10pt;
+            /* Tamaño mediano */
+            margin-bottom: 4mm;
+            /* Espacio debajo */
+            padding-bottom: 2mm;
+            /* Espacio interno abajo */
+            border-bottom: 1.5px solid #0066FF;
+            /* Línea azul debajo del título */
+            text-transform: uppercase;
+            /* TODO EN MAYÚSCULAS */
+            letter-spacing: 1px;
+            /* Espacio entre letras */
+            font-weight: 600;
+            /* Letra semi-gordita */
+        }
+
+        /* Lista de información de contacto */
+        .contact-info {
+            list-style: none;
+            /* Quita los puntos de lista normales */
+            font-size: 8pt;
+            /* Letra pequeñita */
+        }
+
+        /* Cada elemento de contacto (teléfono, email, etc.) */
+        .contact-info li {
+            margin-bottom: 3mm;
+            /* Espacio entre cada uno */
+            display: flex;
+            /* Para alinear bien */
+            align-items: center;
+            /* Centrado vertical */
+            word-break: break-word;
+            /* Rompe palabras largas si es necesario */
+        }
+
+        /* La flechita antes de cada dato de contacto */
+        .contact-info li::before {
+            content: "▸";
+            /* El símbolo de flecha */
+            color: #0066FF;
+            /* Azul eléctrico */
+            font-weight: bold;
+            /* Gordita */
+            margin-right: 2mm;
+            /* Espacio a la derecha */
+        }
+
+        /* Listas de hobbies e idiomas */
+        .hobbies-list,
+        .languages-list {
+            list-style: none;
+            /* Sin puntos normales */
+            font-size: 8pt;
+            /* Letra pequeñita */
+        }
+
+        /* Cada hobby o idioma */
+        .hobbies-list li,
+        .languages-list li {
+            padding: 2mm 0;
+            /* Espacio arriba y abajo */
+            padding-left: 5mm;
+            /* Espacio a la izquierda */
+            position: relative;
+            /* Para poder poner el punto personalizado */
+        }
+
+        /* El puntito azul antes de cada hobby/idioma */
+        .hobbies-list li::before,
+        .languages-list li::before {
+            content: "●";
+            /* Un círculo relleno */
+            color: #0066FF;
+            /* Azul eléctrico */
+            position: absolute;
+            /* Lo posiciona de forma absoluta */
+            left: 0;
+            /* Pegado a la izquierda */
+        }
+
+        /* La cajita de disponibilidad */
+        .availability {
+            background: #0066FF;
+            /* Fondo azul eléctrico */
+            color: white;
+            /* Texto blanco */
+            padding: 3mm;
+            /* Espacio interno */
+            border-radius: 4px;
+            /* Esquinas redondeadas */
+            text-align: center;
+            /* Texto centrado */
+            font-weight: bold;
+            /* Letra gordita */
+            font-size: 8pt;
+            /* Tamaño pequeño */
+        }
+
+        /* ==========================================
+       COLUMNA DERECHA (65%)
+       ========================================== */
+
+        /* La columna grande de la derecha con experiencia y educación */
+        .right-column {
+            padding: 8mm 10mm 8mm 8mm;
+            /* Espacios internos */
+            overflow-y: auto;
+            /* Si hay mucho contenido, permite scroll */
+        }
+
+        /* ==========================================
+       SECCIÓN "SOBRE MÍ"
+       ========================================== */
+
+        /* La caja celeste con tu descripción personal */
+        .about-me {
+            background: #e6f3ff;
+            /* Celeste clarito */
+            padding: 6mm;
+            /* Espacio interno */
+            border-radius: 4px;
+            /* Esquinas redondeadas */
+            margin-bottom: 6mm;
+            /* Espacio debajo */
+            border-left: 3px solid #0066FF;
+            /* Línea azul a la izquierda */
+        }
+
+        /* El texto dentro de "Sobre mí" */
+        .about-me p {
+            color: #1a1a1a;
+            /* Gris muy oscuro */
+            text-align: justify;
+            /* Texto justificado como en un libro */
+            line-height: 1.6;
+            /* Espacio entre líneas */
+            font-size: 8pt;
+            /* Letra pequeñita */
+        }
+
+        /* El botón para mostrar más información */
+        .toggle-btn {
+            background: #0066FF;
+            /* Fondo azul eléctrico */
+            color: white;
+            /* Texto blanco */
+            border: none;
+            /* Sin borde */
+            padding: 2mm 4mm;
+            /* Espacio interno */
+            border-radius: 3px;
+            /* Esquinas redondeadas */
+            cursor: pointer;
+            /* Manita cuando pasas el mouse */
+            margin-top: 2mm;
+            /* Espacio arriba */
+            font-size: 7pt;
+            /* Letra pequeña */
+            transition: all 0.3s ease;
+            /* Animación suave cuando cambias algo */
+        }
+
+        /* Cuando pasas el mouse por encima del botón */
+        .toggle-btn:hover {
+            background: #0052CC;
+            /* Azul un poquito más oscuro */
+            transform: translateY(-1px);
+            /* Se levanta un poquito */
+            box-shadow: 0 3px 10px rgba(0, 102, 255, 0.3);
+            /* Sombra azul */
+        }
+
+        /* La información extra que se muestra/oculta */
+        .extra-info {
+            display: none;
+            /* Empieza escondida */
+            margin-top: 3mm;
+            /* Espacio arriba */
+            padding-top: 3mm;
+            /* Espacio interno arriba */
+            border-top: 1px dashed #0066FF;
+            /* Línea punteada azul arriba */
+        }
+
+        /* Cuando la información extra está visible */
+        .extra-info.show {
+            display: block;
+            /* La muestra */
+            animation: fadeIn 0.5s;
+            /* Animación de aparecer suavecito */
+        }
+
+        /* La animación de aparecer */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                /* Empieza invisible */
+                transform: translateY(-5px);
+                /* Empieza un poco arriba */
+            }
+
+            to {
+                opacity: 1;
+                /* Termina visible */
+                transform: translateY(0);
+                /* Termina en su posición normal */
+            }
+        }
+
+        /* ==========================================
+       TARJETAS DE EXPERIENCIA, EDUCACIÓN Y PROYECTOS
+       ========================================== */
+
+        /* Cada cajita de experiencia, educación o proyecto */
+        .experience-item,
+        .education-item,
+        .project-item {
+            margin-bottom: 5mm;
+            /* Espacio debajo */
+            padding: 4mm;
+            /* Espacio interno */
+            background: #f5f5f5;
+            /* Gris muy clarito */
+            border-radius: 4px;
+            /* Esquinas redondeadas */
+            border-left: 3px solid #0066FF;
+            /* Línea azul a la izquierda */
+            transition: all 0.3s ease;
+            /* Animación suave */
+        }
+
+        /* Cuando pasas el mouse por encima de una tarjeta */
+        .experience-item:hover,
+        .education-item:hover,
+        .project-item:hover {
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            /* Le pone sombra */
+            transform: translateX(2mm);
+            /* Se mueve un poquito a la derecha */
+        }
+
+        /* El título de cada experiencia/educación/proyecto */
+        .experience-item h3,
+        .education-item h3,
+        .project-item h3 {
+            color: #0066FF;
+            /* Azul eléctrico */
+            font-size: 10pt;
+            /* Tamaño mediano */
+            margin-bottom: 2mm;
+            /* Espacio debajo */
+        }
+
+        /* El nombre de la empresa o institución */
+        .company,
+        .institution {
+            color: #1a1a1a;
+            /* Gris muy oscuro */
+            font-weight: bold;
+            /* Letra gordita */
+            font-size: 8.5pt;
+            /* Un poco más grande */
+            margin-bottom: 1mm;
+            /* Espacio debajo */
+        }
+
+        /* Las fechas (cuándo trabajaste o estudiaste) */
+        .date {
+            color: #666666;
+            /* Gris medio */
+            font-style: italic;
+            /* Letra inclinada */
+            margin-bottom: 2mm;
+            /* Espacio debajo */
+            font-size: 7.5pt;
+            /* Letra chiquita */
+        }
+
+        /* La descripción de lo que hiciste */
+        .description {
+            color: #2d2d2d;
+            /* Gris oscuro */
+            font-size: 7.5pt;
+            /* Letra pequeña */
+        }
+
+        /* Cada punto de la lista de descripción */
+        .description li {
+            margin-bottom: 1mm;
+            /* Espacio entre puntos */
+            margin-left: 4mm;
+            /* Espacio a la izquierda */
+        }
+
+        /* ==========================================
+       SECCIÓN DE HABILIDADES TÉCNICAS
+       ========================================== */
+
+        /* La cuadrícula para mostrar las habilidades técnicas */
+        .skills-grid {
+            display: grid;
+            /* Usa grid para organizar en cuadrícula */
+            grid-template-columns: repeat(2, 1fr);
+            /* 2 columnas del mismo tamaño */
+            gap: 3mm;
+            /* Espacio entre cada cajita */
+            margin-top: 4mm;
+            /* Espacio arriba */
+        }
+
+        /* Cada cajita de habilidad */
+        .skill-item {
+            background: #f5f5f5;
+            /* Gris muy clarito */
+            padding: 3mm;
+            /* Espacio interno */
+            border-radius: 4px;
+            /* Esquinas redondeadas */
+            border-left: 2px solid #0066FF;
+            /* Línea azul a la izquierda */
+        }
+
+        /* El nombre de la habilidad */
+        .skill-item h4 {
+            color: #1a1a1a;
+            /* Gris muy oscuro */
+            margin-bottom: 2mm;
+            /* Espacio debajo */
+            font-size: 8pt;
+            /* Letra pequeña */
+        }
+
+        /* La barra gris de fondo del nivel de habilidad */
+        .skill-bar {
+            background: #d0d0d0;
+            /* Gris medio */
+            height: 6px;
+            /* Altura de la barra */
+            border-radius: 3px;
+            /* Esquinas redondeadas */
+            overflow: hidden;
+            /* Esconde lo que se sale */
+            margin-top: 2mm;
+            /* Espacio arriba */
+        }
+
+        /* La parte azul que muestra tu nivel en esa habilidad */
+        .skill-progress {
+            background: linear-gradient(90deg, #0066FF 0%, #00CCFF 100%);
+            /* Azul eléctrico degradado */
+            height: 100%;
+            /* Ocupa todo el alto de la barra */
+            border-radius: 3px;
+            /* Esquinas redondeadas */
+            transition: width 1s ease;
+            /* Animación suave cuando crece */
+        }
+
+        /* ==========================================
+       HABILIDADES BLANDAS (SOFT SKILLS)
+       ========================================== */
+
+        /* El contenedor de las etiquetas de habilidades blandas */
+        .soft-skills {
+            display: flex;
+            /* Para ponerlas en fila */
+            flex-wrap: wrap;
+            /* Si no caben, pasa a la siguiente línea */
+            gap: 2mm;
+            /* Espacio entre etiquetas */
+            margin-top: 4mm;
+            /* Espacio arriba */
+        }
+
+        /* Cada etiqueta de habilidad blanda */
+        .soft-skill-tag {
+            background: #0066FF;
+            /* Fondo azul eléctrico */
+            color: white;
+            /* Texto blanco */
+            padding: 2mm 3mm;
+            /* Espacio interno */
+            border-radius: 12px;
+            /* Bien redondeado como una pastilla */
+            font-size: 7pt;
+            /* Letra pequeña */
+        }
+
+        /* ==========================================
+       RESPONSIVE - PARA PANTALLAS PEQUEÑAS
+       ========================================== */
+
+        /* Cuando la pantalla es más pequeña que 768px (tablets y celulares) */
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+                /* Usa todo el ancho */
+                height: auto;
+                /* Altura automática */
+                margin: 0;
+                /* Sin márgenes */
+            }
+
+            /* Cambia las dos columnas a una sola */
+            .main-content {
+                grid-template-columns: 1fr;
+                /* Una sola columna */
+            }
+
+            /* La columna izquierda ya no tiene borde a la derecha */
+            .left-column {
+                border-right: none;
+                /* Quita el borde derecho */
+                border-bottom: 2mm solid #0066FF;
+                /* Pone borde azul abajo */
+            }
+
+            /* El nombre más pequeño en celular */
+            header h1 {
+                font-size: 18pt;
+                /* Más pequeño */
+            }
+
+            /* Habilidades en una sola columna en celular */
+            .skills-grid {
+                grid-template-columns: 1fr;
+                /* Una columna */
+            }
+
+            /* Foto más pequeña en celular */
+            .profile-img {
+                width: 30mm;
+                /* Más pequeña */
+                height: 30mm;
+                /* Más pequeña */
+            }
+
+            body {
+                padding: 5mm;
+                /* Menos espacio alrededor */
+            }
+        }
+
+        /* ==========================================
+       ESTILOS PARA IMPRIMIR
+       ========================================== */
+
+        /* Cuando imprimes la hoja de vida */
+        @media print {
+            body {
+                background: white;
+                /* Fondo blanco */
+                padding: 0;
+                /* Sin espacios */
+            }
+
+            /* El contenedor ocupa toda la hoja */
+            .container {
+                width: 210mm;
+                /* Ancho A4 */
+                height: 297mm;
+                /* Alto A4 */
+                box-shadow: none;
+                /* Sin sombra al imprimir */
+                margin: 0;
+                /* Sin márgenes */
+                border-radius: 0;
+                /* Sin esquinas redondeadas */
+            }
+
+            /* Esconde el botón al imprimir */
+            .toggle-btn {
+                display: none;
+                /* No se ve */
+            }
+
+            /* Muestra toda la información extra al imprimir */
+            .extra-info {
+                display: block !important;
+                /* La muestra siempre */
+            }
+
+            /* Evita que las secciones se corten en dos páginas */
+            .experience-item,
+            .education-item,
+            .project-item,
+            .skill-item {
+                page-break-inside: avoid;
+                /* No se corta */
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- El encabezado con tu nombre -->
+        <header>
+            <h1>SEBASTIÁN ROJAS</h1>
+            <p>Desarrollador de Software | Profesional Multifacético</p>
+        </header>
+
+        <!-- Las dos columnas principales -->
+        <div class="main-content">
+
+            <!-- ==========================================
+             COLUMNA IZQUIERDA (35%)
+             ========================================== -->
+            <aside class="left-column">
+                <!-- Tu foto -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Front_view_of_a_resting_Canis_lupus_ssp.jpg"
+                    alt="Foto de Sebastián Rojas" class="profile-img" width="180" height="180">
+
+                <!-- Sección de contacto -->
+                <section class="section">
+                    <h2>Contacto</h2>
+                    <ul class="contact-info">
+                        <li><strong>Teléfono:</strong><br>+593 98 322 3670</li>
+                        <li><strong>Email:</strong><br>sebas.educa00@gmail.com</li>
+                        <li><strong>Ubicación:</strong><br>Quito, Ecuador</li>
+                    </ul>
+                </section>
+
+                <!-- Sección de idiomas -->
+                <section class="section">
+                    <h2>Idiomas</h2>
+                    <ul class="languages-list">
+                        <li><strong>Español</strong> - Nativo</li>
+                        <li><strong>Inglés</strong> - Avanzado</li>
+                    </ul>
+                </section>
+
+                <!-- Sección de disponibilidad -->
+                <section class="section">
+                    <h2>Disponibilidad</h2>
+                    <div class="availability">
+                        Inmediata - Tiempo Parcial
+                    </div>
+                </section>
+
+                <!-- Sección de hobbies -->
+                <section class="section">
+                    <h2>Hobbies</h2>
+                    <ul class="hobbies-list">
+                        <li>Fotografía</li>
+                        <li>Deportes</li>
+                        <li>Lectura</li>
+                        <li>Videojuegos</li>
+                        <li>Música</li>
+                    </ul>
+                </section>
+            </aside>
+
+            <!-- ==========================================
+             COLUMNA DERECHA (65%)
+             ========================================== -->
+            <main class="right-column">
+                <!-- Sección "Sobre mí" -->
+                <section class="about-me">
+                    <h2 style="color: #1a1a1a; border: none; margin-bottom: 3mm; font-size: 10pt;">Perfil Profesional
+                    </h2>
+                    <p>
+                        Mi principal meta es contribuir con mi experiencia adquirida durante estos años, ofreciendo
+                        siempre mi máximo esfuerzo y trabajando en conjunto con la empresa para alcanzar objetivos
+                        comunes.
+                    </p>
+                    <!-- Botón para mostrar/ocultar más información -->
+                    <button class="toggle-btn" onclick="toggleExtra()">Mostrar más sobre mí</button>
+                    <!-- Información extra que se muestra al hacer clic -->
+                    <div id="extraInfo" class="extra-info">
+                        <p>
+                            Estoy dispuesto a adaptarme a nuevas situaciones y desafíos de manera inmediata. Creo
+                            firmemente que los valores como el trabajo en equipo y el compañerismo son fundamentales
+                            para el buen desempeño y progreso en cualquier puesto laboral.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Sección de educación -->
+                <section class="section">
+                    <h2>Educación</h2>
+
+                    <div class="education-item">
+                        <h3>Software Development</h3>
+                        <p class="institution">Pontificia Universidad Católica del Ecuador</p>
+                        <p class="date">Actualmente cursando</p>
+                    </div>
+
+                    <div class="education-item">
+                        <h3>Licenciatura en Turismo</h3>
+                        <p class="institution">Universidad Central del Ecuador</p>
+                        <p class="date">Completado</p>
+                    </div>
+
+                    <div class="education-item">
+                        <h3>Bachiller en Ciencias</h3>
+                        <p class="institution">Colegio Nacional "Juan Pío Montúfar", Ecuador</p>
+                        <p class="date">Completado</p>
+                    </div>
+
+                    <div class="education-item">
+                        <h3>Idioma Inglés</h3>
+                        <p class="institution">Centro de Educación Continua - EPN (CEC)</p>
+                        <p class="date">Certificado</p>
+                    </div>
+
+                    <div class="education-item">
+                        <h3>Conductor Profesional</h3>
+                        <p class="institution">Sindicato de Choferes Profesionales de Pichincha</p>
+                        <p class="date">Licencia Profesional</p>
+                    </div>
+                </section>
+
+                <!-- Sección de experiencia laboral -->
+                <section class="section">
+                    <h2>Experiencia Laboral</h2>
+
+                    <div class="experience-item">
+                        <h3>Desarrollador de Software en Prácticas</h3>
+                        <p class="company">PUCE - Servicio Comunitario</p>
+                        <p class="date">Diciembre 2024</p>
+                        <ul class="description">
+                            <li>Asistencia a usuarios en trámites virtuales</li>
+                            <li>Soporte técnico en plataformas digitales</li>
+                            <li>Gestión y resolución de problemas técnicos</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Polifuncional Grúas</h3>
+                        <p class="company">United Crane "USA"</p>
+                        <p class="date">Julio - Septiembre 2024</p>
+                        <ul class="description">
+                            <li>Manejo de seguridad ciudadana</li>
+                            <li>Asistente de operaciones de la grúa</li>
+                            <li>Control de paquetes y encargado de herramientas</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Trabajador Operativo</h3>
+                        <p class="company">Tiendas Industriales Asociadas (TÍA) S.A.</p>
+                        <p class="date">Mayo 2023 - Enero 2024</p>
+                        <ul class="description">
+                            <li>Atención al cliente</li>
+                            <li>Vendedor y cajero</li>
+                            <li>Carga y descarga de alimentos y bebidas</li>
+                            <li>Perchero y seccionista</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Barista y Mesero</h3>
+                        <p class="company">Restaurante La Tagliatella</p>
+                        <p class="date">Junio - Noviembre 2022</p>
+                        <ul class="description">
+                            <li>Preparación de cafés, postres y bebidas</li>
+                            <li>Carga y descarga de alimentos y bebidas</li>
+                            <li>Atención al público personalizada</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Transportista Medicamentos</h3>
+                        <p class="company">GO Delivery Pharma</p>
+                        <p class="date">Noviembre 2021 - Abril 2022</p>
+                        <ul class="description">
+                            <li>Realización de entregas y recogidas de medicamentos</li>
+                            <li>Recogida de documentación y descarga de mercancía</li>
+                            <li>Viajes interprovinciales</li>
+                            <li>Utilización de PDA</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Director Multimedia</h3>
+                        <p class="company">Doggi Style</p>
+                        <p class="date">Abril 2021 - Octubre 2021</p>
+                        <ul class="description">
+                            <li>Fotografía de productos</li>
+                            <li>Videomaker de videos promocionales</li>
+                            <li>Edición de fotografía y video de la marca</li>
+                            <li>Diseño de estampados para ropa</li>
+                        </ul>
+                    </div>
+
+                </section>
+
+                <!-- Sección de proyectos integradores -->
+                <section class="section">
+                    <h2>Proyectos Integradores</h2>
+
+                    <div class="project-item">
+                        <h3>Sistema de Verificación de Cédula Ecuatoriana</h3>
+                        <p class="date">Enero 2024</p>
+                        <p class="description">
+                            Desarrollo de una aplicación web para validar automáticamente números de cédula ecuatoriana
+                            mediante algoritmos de verificación. Implementación de validaciones en frontend y backend
+                            para garantizar la integridad de los datos.
+                        </p>
+                        <p style="margin-top: 2mm; font-size: 7.5pt;"><strong>Tecnologías:</strong> HTML, CSS, Python
+                        </p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Página Web de Alquiler de Autos de Lujo</h3>
+                        <p class="date">Agosto 2024</p>
+                        <p class="description">
+                            Diseño y desarrollo de un sitio web completo para una empresa de alquiler de vehículos de
+                            alta gama. Incluye catálogo interactivo, sistema de reservas, galería de imágenes y panel
+                            administrativo.
+                        </p>
+                        <p style="margin-top: 2mm; font-size: 7.5pt;"><strong>Tecnologías:</strong> HTML, CSS, Javascript,PostgresSQL</p>
+                    </div>
+                </section>
+
+                <!-- Sección de habilidades técnicas -->
+                <section class="section">
+                    <h2>Habilidades Técnicas</h2>
+                    <!-- Cuadrícula con todas las habilidades técnicas -->
+                    <div class="skills-grid">
+                        <!-- Cada habilidad tiene su cajita con una barra de progreso -->
+                        <div class="skill-item">
+                            <h4>Microsoft Office</h4>
+                            <!-- La barra gris de fondo -->
+                            <div class="skill-bar">
+                                <!-- La parte azul que muestra el nivel (90% = muy bueno) -->
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>Python</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>CSS</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>HTML</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>SQL</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>Fotografía</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>Adobe (Renderizado)</h4>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección de habilidades blandas -->
+                <section class="section">
+                    <h2>Habilidades Blandas</h2>
+                    <!-- Etiquetas con forma de pastilla para cada habilidad blanda -->
+                    <div class="soft-skills">
+                        <span class="soft-skill-tag">Trabajo en Equipo</span>
+                        <span class="soft-skill-tag">Gestión del Tiempo</span>
+                        <span class="soft-skill-tag">Pensamiento Analítico</span>
+                        <span class="soft-skill-tag">Resolución de Problemas</span>
+                        <span class="soft-skill-tag">Comunicación Efectiva</span>
+                        <span class="soft-skill-tag">Aprendizaje Continuo</span>
+                        <span class="soft-skill-tag">Liderazgo</span>
+                        <span class="soft-skill-tag">Creatividad</span>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- ========================================== 
+     JAVASCRIPT - EL CEREBRO INTERACTIVO
+     ========================================== -->
+    <script>
+        /* Esta función hace que el botón "Mostrar más" funcione */
+        function toggleExtra() {
+            /* Busca la cajita con la información extra */
+            const extraInfo = document.getElementById('extraInfo');
+            /* Busca el botón */
+            const btn = document.querySelector('.toggle-btn');
+
+            /* Pregunta: ¿La información extra está visible ahora? */
+            if (extraInfo.classList.contains('show')) {
+                /* Si SÍ está visible, la escondemos */
+                extraInfo.classList.remove('show'); /* Quita la clase que la hace visible */
+                btn.textContent = 'Mostrar más sobre mí'; /* Cambia el texto del botón */
+            } else {
+                /* Si NO está visible, la mostramos */
+                extraInfo.classList.add('show'); /* Agrega la clase que la hace visible */
+                btn.textContent = 'Mostrar menos'; /* Cambia el texto del botón */
+            }
+        }
+
+        /* Esta parte hace que las barritas de habilidades se animen cuando cargas la página */
+        window.addEventListener('load', function () {
+            /* Busca todas las barritas azules de progreso */
+            const skillBars = document.querySelectorAll('.skill-progress');
+
+            /* Para cada barrita... */
+            skillBars.forEach(bar => {
+                /* Guarda cuánto debería medir (ej: 90%) */
+                const width = bar.style.width;
+                /* La hace empezar en 0% (invisible) */
+                bar.style.width = '0';
+                /* Después de un poquito de tiempo... */
+                setTimeout(() => {
+                    /* La hace crecer hasta su tamaño real (con animación suave) */
+                    bar.style.width = width;
+                }, 100); /* Espera 100 milisegundos (0.1 segundos) */
+            });
+        });
+    </script>
+    ```
+
+</body>
+
+</html>
