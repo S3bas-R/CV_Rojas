@@ -40,9 +40,9 @@
 
         /* Este es nuestro "papel" donde va toda la hoja de vida */
         .container {
-            width: 210mm;
+            width: 100%;
             /* Ancho de una hoja A4 */
-            height: 297mm;
+            /* height: auto; */
             /* Alto de una hoja A4 */
             margin: 0 auto;
             /* Lo centra en la pantalla */
@@ -70,7 +70,7 @@
             /* Gris muy oscuro degradado */
             color: white;
             /* Texto blanco */
-            padding: 10mm 10mm;
+            padding: 8mm 10mm;
             /* Espacio arriba/abajo y a los lados */
             text-align: center;
             /* Todo centrado */
@@ -80,7 +80,7 @@
 
         /* El nombre grande */
         header h1 {
-            font-size: 24pt;
+            font-size: 25pt;
             /* Tamaño de letra bien grande */
             margin-bottom: 5mm;
             /* Espacio debajo del nombre */
@@ -92,7 +92,7 @@
 
         /* El subtítulo debajo del nombre */
         header p {
-            font-size: 11pt;
+            font-size: 15pt;
             /* Un poquito más pequeño */
             opacity: 0.9;
             /* Un poquito transparente */
@@ -131,7 +131,7 @@
             overflow-y: auto;
             /* Si hay mucho contenido, permite scroll */
         }
-
+        
         /* Tu foto redonda */
         .profile-img {
             width: 40mm;
@@ -151,13 +151,13 @@
             background: linear-gradient(135deg, #0066FF 0%, #00CCFF 100%);
             /* Fondo azul si no hay foto */
         }
-
+        
         /* Cada sección dentro de la columna izquierda */
         .section {
             margin-bottom: 4mm;
             /* Espacio entre secciones */
         }
-
+        
         /* Los títulos de cada sección (ej: "CONTACTO", "IDIOMAS") */
         .section h2 {
             color: #1a1a1a;
@@ -177,7 +177,7 @@
             font-weight: 600;
             /* Letra semi-gordita */
         }
-
+        
         /* Lista de información de contacto */
         .contact-info {
             list-style: none;
@@ -185,9 +185,10 @@
             font-size: 8pt;
             /* Letra pequeñita */
         }
-
+        
         /* Cada elemento de contacto (teléfono, email, etc.) */
         .contact-info li {
+            font-size: 10pt;
             margin-bottom: 3mm;
             /* Espacio entre cada uno */
             display: flex;
