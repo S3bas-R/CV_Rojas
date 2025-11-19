@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const translations = {
   es: {
-    editorTitle: "Editor CV Pro",
+    editorTitle: "Edita tu CV_By Rojas",
     subtitle: "Edita en vivo tu currículum profesional",
     tabs: { personal: "Personal", experience: "Experiencia", education: "Educación", skills: "Habilidades", projects: "Proyectos", design: "Diseño" },
     personal: { title: "Información Personal", fullName: "Nombre Completo", jobTitle: "Título Profesional", email: "Email", phone: "Teléfono", location: "Ubicación", availability: "Disponibilidad", aboutMe: "Sobre Mí", additionalInfo: "Información Adicional", hobbies: "Hobbies (separados por coma)", socialNetworks: "Redes Sociales", linkedin: "LinkedIn", github: "GitHub", portfolio: "Portfolio/Web", twitter: "Twitter" },
@@ -16,7 +16,7 @@ const translations = {
     cv: { contact: "Contacto", languages: "Idiomas", availability: "Disponibilidad", hobbies: "Hobbies", softSkills: "Soft Skills", profile: "Perfil", experience: "Experiencia", education: "Educación", technicalSkills: "Habilidades", projects: "Proyectos", technologies: "Tecnologías" }
   },
   en: {
-    editorTitle: "CV Editor Pro",
+    editorTitle: "CV Editor_ By Rojas",
     subtitle: "Edit your resume live",
     tabs: { personal: "Personal", experience: "Experience", education: "Education", skills: "Skills", projects: "Projects", design: "Design" },
     personal: { title: "Personal Info", fullName: "Full Name", jobTitle: "Job Title", email: "Email", phone: "Phone", location: "Location", availability: "Availability", aboutMe: "About Me", additionalInfo: "Additional Info", hobbies: "Hobbies (comma separated)", socialNetworks: "Social Networks", linkedin: "LinkedIn", github: "GitHub", portfolio: "Portfolio", twitter: "Twitter" },
