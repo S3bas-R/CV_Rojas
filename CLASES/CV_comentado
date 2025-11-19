@@ -531,10 +531,7 @@ export default function CVEditor() {
             {renderTemplate()}
         </div>
     </div>
-</div>
       
-
-    {/* 🧸 Truco secreto para que al imprimir solo salga el CV y nada más */ }
     < style > {`
         @media print {
           body * { visibility: hidden; }  // 🧸 Todo desaparece...
@@ -553,8 +550,7 @@ export default function CVEditor() {
         }
       `}</style >
     </div >
-  );
-}
+
 
 // █████████████████████████████████████████████████████████████████████
 // 🧸 ¡AQUÍ EMPIEZAN LAS PLANTILLAS BONITAS DEL CV! (como disfraces) 🧸
