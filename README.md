@@ -5,7 +5,6 @@ Editor de currículums en tiempo real con **6 plantillas profesionales**, **auto
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![React](https://img.shields.io/badge/React-18.3-61dafb?logo=react)
 ![Tailwind](https://img.shields.io/badge/Tailwind-3.4-38bdf8?logo=tailwindcss)
-![License](https://img.shields.io/badge/license-MIT-green)
 
 ---
 
@@ -678,21 +677,6 @@ npm run build
 - [ ] Preview responsive en el editor
 - [ ] Modo oscuro en el editor
 - [ ] Sync en la nube (Firebase/Supabase)
-
----
-
-## 📄 **Licencia**
-
-MIT License - Puedes usar este proyecto libremente para proyectos personales y comerciales.
-```
-Copyright (c) 2025 [Tu Nombre]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software...
-```
 
 ---
 
