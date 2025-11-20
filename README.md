@@ -1,6 +1,6 @@
-# 🚀 Editor de CV Profesional - Ultimate Edition
+# 🚀 Editor de CVs _ Rojas
 
-Editor de currículums en tiempo real con **6 plantillas profesionales**, **auto-guardado**, **exportación a PDF** y **diseño estilo Apple**. El editor más completo y moderno del mercado.
+Editor de currículums en tiempo real con **6 plantillas profesionales**, **auto-guardado**, **exportación a PDF** y **diseño moderno**.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![React](https://img.shields.io/badge/React-18.3-61dafb?logo=react)
