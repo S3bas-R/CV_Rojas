@@ -19,8 +19,6 @@ Editor de currículums en tiempo real con **6 plantillas profesionales**, **auto
 - [Tecnologías](#-tecnologías)
 - [Plantillas Disponibles](#-plantillas-disponibles)
 - [Troubleshooting](#-troubleshooting)
-- [Contribuir](#-contribuir)
-- [Licencia](#-licencia)
 
 ---
 
