@@ -8,7 +8,7 @@ export const initialData = {
     email: "juan.perez@email.com",
     telefono: "+593 99 123 4567",
     ubicacion: "Quito, Ecuador",
-    foto: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?fit=crop&w=300&h=300",
+    foto: "https://media.revistagq.com/photos/606b3183a359af169e483dcb/16:9/w_1920,c_limit/estar-guapo.jpeg",
     disponibilidad: "Inmediata",
     linkedin: "https://linkedin.com/in/juanperez-demo",
     github: "https://github.com/juanperez-demo",
