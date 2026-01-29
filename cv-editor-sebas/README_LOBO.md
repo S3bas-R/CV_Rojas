@@ -50,10 +50,13 @@ Editor de currículums en tiempo real con **6 plantillas profesionales**, **auto
 
 ### 🔥 **Funcionalidades Premium**
 - 💾 **Auto-guardado** en localStorage (nunca pierdas tu trabajo)
+- ☁️ **Guardado en la Nube** con Supabase (sincroniza entre dispositivos)
+- 👤 **Sistema de Autenticación** - Registro e inicio de sesión seguro
+- 🔄 **Recuperación de CVs** - Carga tus CVs guardados desde cualquier lugar
 - 🌐 **Bilingüe** - Editor en ES/EN + CV independiente en ES/EN
 - 📸 **Upload de foto** + preview en tiempo real
 - 🎨 **Selector de color** con 6 presets + color personalizado
-- 📄 **Export a PDF** perfecto (Ctrl/Cmd + P)
+- 📄 **Export a PDF** perfecto (Ctrl/Cmd + P) - Arreglado y optimizado
 - ✨ **Animaciones Framer Motion** fluidas y profesionales
 - 📱 **100% Responsive** - Desktop, tablet y móvil
 - 🔗 **Redes sociales** completas (LinkedIn, GitHub, Portfolio, Twitter, Instagram)
@@ -450,17 +453,27 @@ useEffect(() => {
 
 ### **Exportar a PDF**
 ```javascript
-// Usa la función de impresión del navegador
+// Usa la función de impresión del navegador con estilos optimizados
 const exportPDF = () => window.print();
 ```
 
 **Cómo usar:**
 1. Click en "Exportar a PDF" o presiona `Ctrl+P` (Windows) / `Cmd+P` (Mac)
-2. Selecciona "Guardar como PDF"
-3. Ajusta márgenes a "Ninguno"
-4. Click en "Guardar"
+2. En la vista previa deberías ver:
+   - ✅ Solo el CV (sin el panel de edición)
+   - ✅ Fondo blanco
+   - ✅ Formato A4 centrado
+3. Selecciona "Guardar como PDF"
+4. Ajusta márgenes a "Ninguno" o "Predeterminado"
+5. Click en "Guardar"
 
 **Formato:** A4 perfecto (210mm × 297mm)
+
+**Nota:** Si el PDF aparece en blanco:
+- Refresca la página (Ctrl+Shift+R)
+- Prueba en modo incógnito
+- Usa Chrome o Edge para mejores resultados
+- Verifica que el CV tenga contenido en la vista previa
 
 ### **Cambio de Idioma**
 - **Editor**: Selector arriba a la derecha (🇪🇸 ES / 🇬🇧 EN)
@@ -479,6 +492,32 @@ const exportPDF = () => window.print();
 
 **O usa URL:**
 - Pega el link de la imagen en el campo "URL imagen"
+
+### **Guardado en la Nube (Supabase)**
+
+**Configuración:**
+1. Crea un archivo `.env.local` en la raíz del proyecto
+2. Agrega tus credenciales de Supabase:
+```env
+VITE_SUPABASE_URL=tu_url_de_supabase
+VITE_SUPABASE_ANON_KEY=tu_clave_anonima
+```
+
+**Uso:**
+1. Ve a la pestaña **"Nube"**
+2. **Registrarse**: Crea una cuenta con email y contraseña
+3. **Iniciar Sesión**: Accede con tus credenciales
+4. **Guardar CV**: Click en "Guardar CV en la Nube"
+5. **Recuperar CV**: Click en "Recuperar CV Guardado"
+
+**Características:**
+- 🔐 Autenticación segura con Supabase Auth
+- 💾 Almacenamiento en PostgreSQL
+- 🔄 Sincronización entre dispositivos
+- 👤 Saludo personalizado con tu nombre de usuario
+- 🔒 Row Level Security (RLS) - Solo tú puedes ver tus CVs
+
+**Nota:** El botón "Recuperar CV Guardado" solo aparece cuando has iniciado sesión.
 
 ---
 
@@ -723,4 +762,4 @@ Desarrollado con ❤️ por **Sebastián Rojas**
 ---
 **Hecho con 💙 en Ecuador 🇪🇨**
 
-**Última actualización:** Noviembre 2025
+**Última actualización:** Enero 2026

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 
 import { translations } from './constants/translations';
 import { useCV } from './hooks/useCV';
+import { supabase } from './supabase';
 
 import {
   ProfessionalTemplate, ModernTemplate, MinimalTemplate,
@@ -23,10 +24,23 @@ import {
 export default function CVEditor() {
   const [activeTab, setActiveTab] = useState('personal');
   const [language, setLanguage] = useState('es');
+  const [userEmail, setUserEmail] = useState('');
+
+  React.useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUserEmail(session?.user?.email || '');
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUserEmail(session?.user?.email || '');
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   // Custom Hook para manejar la lógica del CV
   const {
-    data, updateField, addItem, removeItem, updateItem, resetData
+    data, updateField, addItem, removeItem, updateItem, resetData, setData
   } = useCV();
 
   const printRef = useRef();
@@ -77,7 +91,7 @@ export default function CVEditor() {
       <div className="flex flex-col lg:flex-row min-h-screen relative z-10">
 
         {/* PANEL IZQUIERDO: EDITOR */}
-        <div className="w-full lg:w-2/5 bg-white/95 backdrop-blur-xl overflow-y-auto shadow-2xl border-r border-gray-200/50 h-screen sticky top-0">
+        <div className="no-print w-full lg:w-2/5 bg-white/95 backdrop-blur-xl overflow-y-auto shadow-2xl border-r border-gray-200/50 h-screen sticky top-0">
 
           {/* Header del Editor */}
           <div className="sticky top-0 bg-white/80 backdrop-blur-2xl border-b border-gray-200/50 p-6 z-20">
@@ -96,6 +110,12 @@ export default function CVEditor() {
                 <option value="en">🇬🇧 EN</option>
               </select>
             </div>
+            {userEmail && (
+              <div className="mb-2 px-3 py-2 bg-blue-50 text-blue-700 rounded-lg text-sm font-medium flex items-center gap-2">
+                <User className="w-4 h-4" />
+                Hola, {userEmail.split('@')[0]}
+              </div>
+            )}
           </div>
 
           {/* Navegación de Pestañas */}
@@ -124,7 +144,7 @@ export default function CVEditor() {
             {activeTab === 'proyectos' && <ProjectsForm data={data} updateItem={updateItem} addItem={addItem} removeItem={removeItem} t={t.projects} />}
             {activeTab === 'extras' && <ExtrasForm data={data} updateItem={updateItem} addItem={addItem} removeItem={removeItem} t={t} />}
             {activeTab === 'diseno' && <DesignForm data={data} updateField={updateField} t={t.design} exportPDF={exportPDF} resetData={resetData} />}
-            {activeTab === 'cloud' && <CloudForm data={data} t={t} />}
+            {activeTab === 'cloud' && <CloudForm data={data} setData={setData} t={t} />}
           </div>
         </div>
 
@@ -142,12 +162,71 @@ export default function CVEditor() {
       {/* Estilos para impresión */}
       <style>{`
         @media print {
-          body * { visibility: hidden; }
-          #cv-preview, #cv-preview * { visibility: visible; }
-          #cv-preview { position: absolute; left: 0; top: 0; width: 210mm; height: 297mm; margin: 0; padding: 0; }
-          @page { size: A4; margin: 0; }
-          /* Ocultar scrollbars al imprimir */
-          ::-webkit-scrollbar { display: none; }
+          /* Ocultar elementos que no deben imprimirse */
+          .no-print {
+            display: none !important;
+          }
+          
+          /* Resetear estilos del body */
+          body {
+            margin: 0 !important;
+            padding: 0 !important;
+            background: white !important;
+          }
+          
+          /* Contenedor principal */
+          .min-h-screen {
+            min-height: auto !important;
+            background: white !important;
+          }
+          
+          /* Panel de vista previa */
+          .flex-1 {
+            background: white !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+          }
+          
+          /* Contenedor del CV */
+          .max-w-\\[210mm\\] {
+            max-width: 210mm !important;
+            transform: none !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+          }
+          
+          /* El CV en sí */
+          #cv-preview {
+            width: 210mm !important;
+            min-height: 297mm !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: white !important;
+            box-shadow: none !important;
+            page-break-after: auto !important;
+          }
+          
+          /* Asegurar que todo el contenido sea visible */
+          #cv-preview * {
+            visibility: visible !important;
+            opacity: 1 !important;
+          }
+          
+          /* Evitar que los elementos se rompan entre páginas */
+          #cv-preview h1, #cv-preview h2, #cv-preview h3 {
+            page-break-after: avoid !important;
+          }
+          
+          #cv-preview section {
+            page-break-inside: avoid !important;
+          }
+          
+          /* Configuración de página A4 */
+          @page {
+            size: A4 portrait;
+            margin: 0;
+          }
         }
       `}</style>
     </div>

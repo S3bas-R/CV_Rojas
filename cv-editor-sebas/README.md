@@ -7,7 +7,8 @@ Este proyecto es un Portafolio y Editor de CV Profesional Full-Stack desarrollad
 - 🎨 **Frontend Moderno:** React + Vite + TailwindCSS + Framer Motion.
 - 🛠 **Componentes Modulares:** Arquitectura limpia y mantenible.
 - 💾 **Persistencia de Datos:** Backend robusto con PostgreSQL.
-- ☁ **Nube:** Despliegue optimizado para Vercel y Cloudflare.
+- ☁ **Nube:** Guardado y recuperación de CVs en la nube con Supabase.
+- 👤 **Personalización:** Saludos personalizados y gestión de sesión de usuario.
 - 🔒 **Seguridad:** Protección contra SQL Injection y XSS.
 
 ## 🛠 Justificación de Tecnologías
@@ -112,22 +113,22 @@ Necesitamos crear las tablas `users` y `cv_data` en tu nueva base de datos de Su
 3. Copia el contenido del archivo `schema.sql` de este proyecto:
 
    ```sql
-   -- Tabla de Usuarios
-   CREATE TABLE IF NOT EXISTS users (
-     id SERIAL PRIMARY KEY,
-     email VARCHAR(255) UNIQUE NOT NULL,
-     password_hash VARCHAR(255) NOT NULL,
-     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-   );
-
    -- Tabla para guardar los datos del CV
    CREATE TABLE IF NOT EXISTS cv_data (
      id SERIAL PRIMARY KEY,
-     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+     user_id UUID NOT NULL, -- UUID para coincidir con Supabase Auth
      data JSONB NOT NULL,
      updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
      UNIQUE(user_id)
    );
+
+   -- Habilitar Row Level Security (RLS)
+   ALTER TABLE cv_data ENABLE ROW LEVEL SECURITY;
+
+   -- Política: Permitir que los usuarios gestionen su propio CV
+   CREATE POLICY "Usuarios gestionan su propio CV" ON cv_data
+     FOR ALL
+     USING (auth.uid() = user_id);
    ```
 
 4. Pega el código SQL en el editor de Supabase y haz clic en **"Run"**. Asegúrate de ver "Success".

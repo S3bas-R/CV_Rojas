@@ -76,6 +76,7 @@ export const useCV = () => {
         addItem,
         removeItem,
         updateItem,
-        resetData
+        resetData,
+        setData
     };
 };

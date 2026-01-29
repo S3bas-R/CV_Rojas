@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Cloud, LogIn, Save, UserPlus, Check, AlertCircle } from 'lucide-react';
 import { supabase } from '../../supabase';
 
-export const CloudForm = ({ data, t }) => {
+export const CloudForm = ({ data, setData, t }) => {
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -11,27 +11,28 @@ export const CloudForm = ({ data, t }) => {
 
     // Effect to check and set token from Supabase session on component mount
     useEffect(() => {
-        const getSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session) {
-                setToken(session.access_token);
-            }
-        };
-        getSession();
-
-        // Listen for auth state changes
-        const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-            if (session) {
-                setToken(session.access_token);
-            } else {
-                setToken(null);
-            }
+        // Obtenemos la sesión actual
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            console.log('CloudForm - Sesión actual:', session);
+            setToken(session?.access_token || null);
+        }).catch(err => {
+            console.error("Error getting session:", err);
+            setToken(null);
         });
 
-        return () => {
-            authListener.subscription.unsubscribe();
-        };
+        // Escuchamos cambios en la autenticación
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            console.log('CloudForm - Cambio de auth:', _event, session);
+            setToken(session?.access_token || null);
+        });
+
+        return () => subscription.unsubscribe();
     }, []);
+
+    // Log cuando cambia el token para debugging
+    useEffect(() => {
+        console.log('CloudForm - Token actualizado:', token ? 'Existe' : 'No existe');
+    }, [token]);
 
     const handleAuth = async (e) => {
         e.preventDefault();
@@ -74,9 +75,9 @@ export const CloudForm = ({ data, t }) => {
         setStatus({ type: 'loading', msg: 'Guardando en la nube...' });
 
         try {
-            const { data: { user } } = await supabase.auth.getUser();
+            const { data: { user }, error: userError } = await supabase.auth.getUser();
 
-            if (!user) throw new Error("No usuario");
+            if (userError || !user) throw new Error("No se pudo obtener el usuario. Intenta iniciar sesión nuevamente.");
 
             const { error } = await supabase
                 .from('cv_data')
@@ -87,6 +88,37 @@ export const CloudForm = ({ data, t }) => {
             setStatus({ type: 'success', msg: '¡CV Guardado exitosamente en la nube!' });
         } catch (err) {
             setStatus({ type: 'error', msg: err.message || 'Error al guardar.' });
+        }
+    };
+
+    const handleLoadCV = async () => {
+        if (!token) return setStatus({ type: 'error', msg: 'Debes iniciar sesión primero.' });
+        setStatus({ type: 'loading', msg: 'Cargando CV...' });
+
+        try {
+            const { data: { user }, error: userError } = await supabase.auth.getUser();
+            if (userError || !user) throw new Error("No se pudo obtener el usuario.");
+
+            const { data: cvData, error } = await supabase
+                .from('cv_data')
+                .select('data')
+                .eq('user_id', user.id)
+                .single();
+
+            if (error) throw error;
+
+            if (cvData && cvData.data) {
+                if (setData) {
+                    setData(cvData.data);
+                    setStatus({ type: 'success', msg: '¡CV cargado exitosamente!' });
+                } else {
+                    setStatus({ type: 'error', msg: 'Error interno: setData no disponible.' });
+                }
+            } else {
+                setStatus({ type: 'error', msg: 'No se encontró ningún CV guardado.' });
+            }
+        } catch (err) {
+            setStatus({ type: 'error', msg: err.message || 'Error al cargar.' });
         }
     };
 
@@ -136,13 +168,19 @@ export const CloudForm = ({ data, t }) => {
                 <div className="space-y-4">
                     <div className="bg-blue-50 border border-blue-100 p-6 rounded-2xl">
                         <h3 className="font-bold text-blue-900 mb-2">Sesión Activa</h3>
-                        <p className="text-sm text-blue-700 mb-4">Has iniciado sesión correctamente. Puedes guardar tu progreso en la nube para acceder desde cualquier dispositivo.</p>
+                        <p className="text-sm text-blue-700 mb-4">Has iniciado sesión correctamente.</p>
                         <button onClick={handleLogout} className="text-sm text-red-600 font-semibold hover:text-red-700">Cerrar Sesión</button>
                     </div>
 
-                    <button onClick={handleSaveCV} className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-4 rounded-xl hover:shadow-lg hover:scale-[1.02] transition-all flex justify-center items-center gap-3">
-                        <Save className="w-5 h-5" /> Guardar CV en la Nube
-                    </button>
+                    <div className="grid grid-cols-1 gap-3">
+                        <button onClick={handleSaveCV} className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-4 rounded-xl hover:shadow-lg hover:scale-[1.02] transition-all flex justify-center items-center gap-3">
+                            <Save className="w-5 h-5" /> Guardar CV en la Nube
+                        </button>
+
+                        <button onClick={handleLoadCV} className="w-full bg-white border-2 border-purple-100 text-purple-700 font-semibold py-4 rounded-xl hover:bg-purple-50 transition-all flex justify-center items-center gap-3">
+                            <Cloud className="w-5 h-5" /> Recuperar CV Guardado
+                        </button>
+                    </div>
                 </div>
             )}
         </div>
