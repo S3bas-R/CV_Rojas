@@ -20,7 +20,7 @@ Este proyecto es un Portafolio y Editor de CV Profesional Full-Stack desarrollad
 ### Pasos
 1. **Clonar el repositorio:**
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/S3bas-R/CV_Rojas.git
    cd cv-editor-sebas
    ```
 
