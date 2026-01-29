@@ -1,39 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Cloud, LogIn, Save, UserPlus, Check, AlertCircle } from 'lucide-react';
+import { supabase } from '../../supabase';
 
 export const CloudForm = ({ data, t }) => {
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [status, setStatus] = useState({ type: '', msg: '' });
-    const [token, setToken] = useState(localStorage.getItem('auth_token'));
+    const [token, setToken] = useState(null); // Initialize token as null, will be set by effect
+
+    // Effect to check and set token from Supabase session on component mount
+    useEffect(() => {
+        const getSession = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                setToken(session.access_token);
+            }
+        };
+        getSession();
+
+        // Listen for auth state changes
+        const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+            if (session) {
+                setToken(session.access_token);
+            } else {
+                setToken(null);
+            }
+        });
+
+        return () => {
+            authListener.subscription.unsubscribe();
+        };
+    }, []);
 
     const handleAuth = async (e) => {
         e.preventDefault();
         setStatus({ type: 'loading', msg: 'Procesando...' });
 
         try {
-            const res = await fetch('/api/auth', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action: isLogin ? 'login' : 'register', email, password })
-            });
-            const json = await res.json();
-
-            if (res.ok) {
-                if (isLogin) {
-                    localStorage.setItem('auth_token', json.token);
-                    setToken(json.token);
-                    setStatus({ type: 'success', msg: '¡Bienvenido de vuelta!' });
-                } else {
-                    setStatus({ type: 'success', msg: 'Registro exitoso. Ahora puedes iniciar sesión.' });
-                    setIsLogin(true);
-                }
+            let res, error;
+            if (isLogin) {
+                const { data, error: authError } = await supabase.auth.signInWithPassword({
+                    email,
+                    password,
+                })
+                res = data;
+                error = authError;
             } else {
-                setStatus({ type: 'error', msg: json.error || 'Error en la solicitud' });
+                const { data, error: authError } = await supabase.auth.signUp({
+                    email,
+                    password,
+                })
+                res = data;
+                error = authError;
+            }
+
+            if (error) throw error;
+
+            if (isLogin) {
+                // setToken(res.session.access_token); // Token is now set by onAuthStateChange listener
+                setStatus({ type: 'success', msg: '¡Bienvenido de vuelta!' });
+            } else {
+                setStatus({ type: 'success', msg: 'Registro exitoso. Revisa tu email para confirmar.' });
+                // En Supabase, el login no es automático tras registro si se requiere confirmación de email
             }
         } catch (err) {
-            setStatus({ type: 'error', msg: 'Error de conexión con el servidor.' });
+            setStatus({ type: 'error', msg: err.message || 'Error en la solicitud' });
         }
     };
 
@@ -42,27 +74,25 @@ export const CloudForm = ({ data, t }) => {
         setStatus({ type: 'loading', msg: 'Guardando en la nube...' });
 
         try {
-            const res = await fetch('/api/cv', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({ data })
-            });
+            const { data: { user } } = await supabase.auth.getUser();
 
-            if (res.ok) {
-                setStatus({ type: 'success', msg: '¡CV Guardado exitosamente en la nube!' });
-            } else {
-                setStatus({ type: 'error', msg: 'Error al guardar.' });
-            }
+            if (!user) throw new Error("No usuario");
+
+            const { error } = await supabase
+                .from('cv_data')
+                .upsert({ user_id: user.id, data: data }, { onConflict: 'user_id' })
+
+            if (error) throw error;
+
+            setStatus({ type: 'success', msg: '¡CV Guardado exitosamente en la nube!' });
         } catch (err) {
-            setStatus({ type: 'error', msg: 'Error de conexión.' });
+            setStatus({ type: 'error', msg: err.message || 'Error al guardar.' });
         }
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem('auth_token');
+    const handleLogout = async () => { // Made async to await supabase.auth.signOut()
+        await supabase.auth.signOut();
+        // localStorage.removeItem('auth_token'); // Supabase handles session storage
         setToken(null);
         setStatus({ type: '', msg: '' });
     };
