@@ -22,7 +22,7 @@ export const ExtrasForm = ({ data, updateItem, addItem, removeItem, t }) => {
                         <div className="space-y-2 pr-6">
                             <input type="text" value={cert.nombre} onChange={(e) => updateItem('certificaciones', cert.id, 'nombre', e.target.value)} className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 outline-none text-sm" placeholder="Nombre certificación" />
                             <input type="text" value={cert.emisor} onChange={(e) => updateItem('certificaciones', cert.id, 'emisor', e.target.value)} className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 outline-none text-sm" placeholder="Emisor" />
-                            <div className="grid grid-cols-2 gap-2">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 <input type="text" value={cert.fecha} onChange={(e) => updateItem('certificaciones', cert.id, 'fecha', e.target.value)} className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 outline-none text-sm" placeholder="Fecha" />
                                 <input type="text" value={cert.credencial} onChange={(e) => updateItem('certificaciones', cert.id, 'credencial', e.target.value)} className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 outline-none text-sm" placeholder="ID Credencial" />
                             </div>

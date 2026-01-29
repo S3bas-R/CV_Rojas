@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Palette, User, Briefcase, GraduationCap, Code, Rocket, Plus, Settings, Cloud } from 'lucide-react';
+import { Palette, User, Briefcase, GraduationCap, Code, Rocket, Plus, Settings, Cloud, Eye, Edit } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import { translations } from './constants/translations';
@@ -25,6 +25,7 @@ export default function CVEditor() {
   const [activeTab, setActiveTab] = useState('personal');
   const [language, setLanguage] = useState('es');
   const [userEmail, setUserEmail] = useState('');
+  const [showPreview, setShowPreview] = useState(false);
 
   React.useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -91,7 +92,7 @@ export default function CVEditor() {
       <div className="flex flex-col lg:flex-row min-h-screen relative z-10">
 
         {/* PANEL IZQUIERDO: EDITOR */}
-        <div className="no-print w-full lg:w-2/5 bg-white/95 backdrop-blur-xl overflow-y-auto shadow-2xl border-r border-gray-200/50 h-screen sticky top-0">
+        <div className={`no-print w-full lg:w-2/5 bg-white/95 backdrop-blur-xl overflow-y-auto shadow-2xl border-r border-gray-200/50 h-screen sticky top-0 ${showPreview ? 'hidden lg:block' : 'block'}`}>
 
           {/* Header del Editor */}
           <div className="sticky top-0 bg-white/80 backdrop-blur-2xl border-b border-gray-200/50 p-6 z-20">
@@ -149,8 +150,8 @@ export default function CVEditor() {
         </div>
 
         {/* PANEL DERECHO: VISTA PREVIA */}
-        <div className="flex-1 bg-gradient-to-br from-slate-800 to-slate-900 p-4 lg:p-8 overflow-y-auto">
-          <div className="max-w-[210mm] mx-auto transition-all duration-500 ease-in-out transform origin-top scale-95 lg:scale-100">
+        <div className={`flex-1 bg-gradient-to-br from-slate-800 to-slate-900 p-4 lg:p-8 overflow-y-auto ${showPreview ? 'block' : 'hidden lg:block'}`}>
+          <div className="max-w-[210mm] mx-auto transition-all duration-500 ease-in-out transform origin-top scale-[0.43] sm:scale-[0.6] md:scale-[0.8] lg:scale-100">
             <div ref={printRef} id="cv-preview">
               {renderTemplate()}
             </div>
@@ -158,6 +159,14 @@ export default function CVEditor() {
         </div>
 
       </div>
+
+      {/* Toggle Mobile Button */}
+      <button
+        onClick={() => setShowPreview(!showPreview)}
+        className="lg:hidden fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-2xl z-50 hover:bg-blue-700 transition-all hover:scale-110 active:scale-95"
+      >
+        {showPreview ? <Edit className="w-6 h-6" /> : <Eye className="w-6 h-6" />}
+      </button>
 
       {/* Estilos para impresión */}
       <style>{`

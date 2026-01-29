@@ -19,7 +19,7 @@ export const DesignForm = ({ data, updateField, t, exportPDF, resetData }) => {
 
             <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-2xl border border-blue-100">
                 <label className="block text-sm font-medium text-gray-700 mb-4">{t.template}</label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
                         { id: 'professional', name: t.professional, emoji: '💼' },
                         { id: 'modern', name: t.modern, emoji: '🎨' },
