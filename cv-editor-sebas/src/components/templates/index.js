@@ -4,3 +4,4 @@ export * from './MinimalTemplate';
 export * from './CreativeTemplate';
 export * from './TechTemplate';
 export * from './ExecutiveTemplate';
+export * from './CustomTemplate';

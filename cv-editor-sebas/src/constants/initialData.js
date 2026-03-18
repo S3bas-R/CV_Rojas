@@ -48,5 +48,12 @@ export const initialData = {
     ],
     colorPrincipal: "#0066FF",
     plantilla: "professional",
-    idiomaCv: "es"
+    idiomaCv: "es",
+    customStyle: {
+        fontFamily: "'Inter', sans-serif",
+        headerAlignment: "left", /* left, center o right */
+        layout: "two-column", /* one-column, two-column */
+        backgroundColor: "#ffffff",
+        textColor: "#1f2937"
+    }
 };

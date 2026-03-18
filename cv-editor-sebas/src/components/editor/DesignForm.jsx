@@ -26,7 +26,8 @@ export const DesignForm = ({ data, updateField, t, exportPDF, resetData }) => {
                         { id: 'minimal', name: t.minimal, emoji: '✨' },
                         { id: 'creative', name: 'Creativo', emoji: '🚀' },
                         { id: 'tech', name: 'Tech', emoji: '💻' },
-                        { id: 'executive', name: 'Ejecutivo', emoji: '👔' }
+                        { id: 'executive', name: 'Ejecutivo', emoji: '👔' },
+                        { id: 'custom', name: 'Personalizado', emoji: '🛠️' }
                     ].map(tpl => (
                         <button key={tpl.id} onClick={() => updateField('plantilla', tpl.id)} className={`p-4 rounded-xl border-2 transition-all ${data.plantilla === tpl.id ? 'border-blue-600 bg-blue-50 shadow-md scale-105' : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'}`}>
                             <div className="text-2xl mb-1">{tpl.emoji}</div>
@@ -35,6 +36,69 @@ export const DesignForm = ({ data, updateField, t, exportPDF, resetData }) => {
                     ))}
                 </div>
             </div>
+
+            {data.plantilla === 'custom' && (
+                <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-2xl border border-indigo-100 mb-6 space-y-4 shadow-sm">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">Ajustes Personalizados</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Fuente</label>
+                            <select 
+                                value={data.customStyle?.fontFamily || "'Inter', sans-serif"} 
+                                onChange={(e) => updateField('customStyle', { ...data.customStyle, fontFamily: e.target.value })}
+                                className="w-full px-3 py-2 border rounded-xl bg-white shadow-sm focus:ring-2 focus:ring-indigo-500"
+                            >
+                                <option value="'Inter', sans-serif">Inter</option>
+                                <option value="'Roboto', sans-serif">Roboto</option>
+                                <option value="'Merriweather', serif">Merriweather</option>
+                                <option value="'Outfit', sans-serif">Outfit</option>
+                                <option value="monospace">Monospace</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Alineación del Encabezado</label>
+                            <select 
+                                value={data.customStyle?.headerAlignment || "left"} 
+                                onChange={(e) => updateField('customStyle', { ...data.customStyle, headerAlignment: e.target.value })}
+                                className="w-full px-3 py-2 border rounded-xl bg-white shadow-sm focus:ring-2 focus:ring-indigo-500"
+                            >
+                                <option value="left">Izquierda</option>
+                                <option value="center">Centro</option>
+                                <option value="right">Derecha</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Disposición</label>
+                            <select 
+                                value={data.customStyle?.layout || "two-column"} 
+                                onChange={(e) => updateField('customStyle', { ...data.customStyle, layout: e.target.value })}
+                                className="w-full px-3 py-2 border rounded-xl bg-white shadow-sm focus:ring-2 focus:ring-indigo-500"
+                            >
+                                <option value="one-column">1 Columna</option>
+                                <option value="two-column">2 Columnas</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Color de Fondo</label>
+                            <input 
+                                type="color" 
+                                value={data.customStyle?.backgroundColor || "#ffffff"} 
+                                onChange={(e) => updateField('customStyle', { ...data.customStyle, backgroundColor: e.target.value })}
+                                className="w-full h-10 rounded cursor-pointer border shadow-sm" 
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Color de Texto</label>
+                            <input 
+                                type="color" 
+                                value={data.customStyle?.textColor || "#1f2937"} 
+                                onChange={(e) => updateField('customStyle', { ...data.customStyle, textColor: e.target.value })}
+                                className="w-full h-10 rounded cursor-pointer border shadow-sm" 
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl border border-green-100">
                 <label className="block text-sm font-medium text-gray-700 mb-4">Idioma del CV</label>

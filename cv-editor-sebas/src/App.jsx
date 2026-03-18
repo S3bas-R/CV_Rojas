@@ -8,7 +8,7 @@ import { supabase } from './supabase';
 
 import {
   ProfessionalTemplate, ModernTemplate, MinimalTemplate,
-  CreativeTemplate, TechTemplate, ExecutiveTemplate
+  CreativeTemplate, TechTemplate, ExecutiveTemplate, CustomTemplate
 } from './components/templates';
 
 import {
@@ -60,6 +60,7 @@ export default function CVEditor() {
       case 'creative': return <CreativeTemplate {...props} />;
       case 'tech': return <TechTemplate {...props} />;
       case 'executive': return <ExecutiveTemplate {...props} />;
+      case 'custom': return <CustomTemplate {...props} />;
       default: return <ProfessionalTemplate {...props} />;
     }
   };
@@ -171,6 +172,13 @@ export default function CVEditor() {
       {/* Estilos para impresión */}
       <style>{`
         @media print {
+          /* Asegurar que los fondos y gradientes se impriman */
+          * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+          }
+          
           /* Ocultar elementos que no deben imprimirse */
           .no-print {
             display: none !important;
