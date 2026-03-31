@@ -73,6 +73,54 @@ export const CreativeTemplate = ({ data, t }) => {
                     </div>
                 </div>
             )}
+
+            {data.certificaciones?.length > 0 && (
+                <div className="mt-8">
+                    <h2 className="text-3xl font-black mb-6" style={{ color: data.colorPrincipal }}>{t.certifications}</h2>
+                    <div className="space-y-4">
+                        {data.certificaciones.map((cert) => (
+                            <div key={cert.id} className="bg-white/70 backdrop-blur p-6 rounded-2xl shadow-lg">
+                                <h3 className="text-xl font-bold text-gray-900">{cert.nombre}</h3>
+                                <p className="font-semibold" style={{ color: data.colorPrincipal }}>{cert.emisor}</p>
+                                <p className="text-sm text-gray-500 mb-1">{cert.fecha}</p>
+                                {cert.credencial && <p className="text-sm text-gray-700">ID: {cert.credencial}</p>}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {data.voluntariado?.length > 0 && (
+                <div className="mt-8">
+                    <h2 className="text-3xl font-black mb-6" style={{ color: data.colorPrincipal }}>{t.volunteer}</h2>
+                    <div className="space-y-4">
+                        {data.voluntariado.map((vol) => (
+                            <div key={vol.id} className="bg-white/70 backdrop-blur p-6 rounded-2xl shadow-lg">
+                                <h3 className="text-xl font-bold text-gray-900">{vol.rol}</h3>
+                                <p className="font-semibold" style={{ color: data.colorPrincipal }}>{vol.organizacion}</p>
+                                <p className="text-sm text-gray-500 mb-2">{vol.fecha}</p>
+                                {vol.descripcion && <p className="text-sm text-gray-700">{vol.descripcion}</p>}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {data.premios?.length > 0 && (
+                <div className="mt-8">
+                    <h2 className="text-3xl font-black mb-6" style={{ color: data.colorPrincipal }}>{t.awards}</h2>
+                    <div className="space-y-4">
+                        {data.premios.map((premio) => (
+                            <div key={premio.id} className="bg-white/70 backdrop-blur p-6 rounded-2xl shadow-lg">
+                                <h3 className="text-xl font-bold text-gray-900">{premio.titulo}</h3>
+                                <p className="font-semibold" style={{ color: data.colorPrincipal }}>{premio.emisor}</p>
+                                <p className="text-sm text-gray-500 mb-2">{premio.fecha}</p>
+                                {premio.descripcion && <p className="text-sm text-gray-700">{premio.descripcion}</p>}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

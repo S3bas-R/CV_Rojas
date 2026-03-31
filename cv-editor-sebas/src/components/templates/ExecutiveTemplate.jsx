@@ -66,7 +66,7 @@ export const ExecutiveTemplate = ({ data, t }) => {
                     )}
 
                     {data.skills.length > 0 && (
-                        <div className="border-t-2 border-gray-200 pt-8">
+                        <div className="border-t-2 border-gray-200 pt-8 mb-8">
                             <h2 className="text-2xl font-light text-gray-900 mb-6 uppercase tracking-widest" style={{ color: data.colorPrincipal }}>{t.technicalSkills}</h2>
                             <div className="grid grid-cols-2 gap-x-12 gap-y-4">
                                 {data.skills.map((skill) => (
@@ -76,6 +76,64 @@ export const ExecutiveTemplate = ({ data, t }) => {
                                             <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${skill.nivel}%`, backgroundColor: data.colorPrincipal }}></div>
                                         </div>
                                         <span className="text-xs text-gray-500 w-10 text-right">{skill.nivel}%</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {data.certificaciones?.length > 0 && (
+                        <div className="border-t-2 border-gray-200 pt-8 mb-8">
+                            <h2 className="text-2xl font-light text-gray-900 mb-6 uppercase tracking-widest" style={{ color: data.colorPrincipal }}>{t.certifications}</h2>
+                            <div className="space-y-4">
+                                {data.certificaciones.map((cert) => (
+                                    <div key={cert.id} className="flex justify-between items-start">
+                                        <div>
+                                            <h3 className="text-lg font-semibold text-gray-900">{cert.nombre}</h3>
+                                            <p className="text-gray-700">{cert.emisor}</p>
+                                            {cert.credencial && <p className="text-xs text-gray-500 mt-1">ID: {cert.credencial}</p>}
+                                        </div>
+                                        <span className="text-sm text-gray-500 font-light italic">{cert.fecha}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {data.voluntariado?.length > 0 && (
+                        <div className="border-t-2 border-gray-200 pt-8 mb-8">
+                            <h2 className="text-2xl font-light text-gray-900 mb-6 uppercase tracking-widest" style={{ color: data.colorPrincipal }}>{t.volunteer}</h2>
+                            <div className="space-y-4">
+                                {data.voluntariado.map((vol) => (
+                                    <div key={vol.id}>
+                                        <div className="flex justify-between items-start mb-2">
+                                            <div>
+                                                <h3 className="text-lg font-semibold text-gray-900">{vol.rol}</h3>
+                                                <p className="text-gray-700">{vol.organizacion}</p>
+                                            </div>
+                                            <span className="text-sm text-gray-500 font-light italic">{vol.fecha}</span>
+                                        </div>
+                                        {vol.descripcion && <p className="text-sm text-gray-600 mt-1">{vol.descripcion}</p>}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {data.premios?.length > 0 && (
+                        <div className="border-t-2 border-gray-200 pt-8 mb-8">
+                            <h2 className="text-2xl font-light text-gray-900 mb-6 uppercase tracking-widest" style={{ color: data.colorPrincipal }}>{t.awards}</h2>
+                            <div className="space-y-4">
+                                {data.premios.map((premio) => (
+                                    <div key={premio.id}>
+                                        <div className="flex justify-between items-start mb-2">
+                                            <div>
+                                                <h3 className="text-lg font-semibold text-gray-900">{premio.titulo}</h3>
+                                                <p className="text-gray-700">{premio.emisor}</p>
+                                            </div>
+                                            <span className="text-sm text-gray-500 font-light italic">{premio.fecha}</span>
+                                        </div>
+                                        {premio.descripcion && <p className="text-sm text-gray-600 mt-1">{premio.descripcion}</p>}
                                     </div>
                                 ))}
                             </div>

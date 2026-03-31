@@ -136,6 +136,54 @@ export const ModernTemplate = ({ data, t }) => {
                             </div>
                         </section>
                     )}
+
+                    {data.certificaciones?.length > 0 && (
+                        <section>
+                            <h2 className="text-3xl font-black mb-6" style={{ color: data.colorPrincipal }}>{t.certifications}</h2>
+                            <div className="space-y-4">
+                                {data.certificaciones.map((cert) => (
+                                    <div key={cert.id} className="bg-gray-50 p-5 rounded-xl border-2 border-gray-100">
+                                        <h3 className="text-lg font-bold mb-1">{cert.nombre}</h3>
+                                        <p className="text-xs text-gray-500 mb-2">{cert.fecha}</p>
+                                        <p className="text-sm font-bold" style={{ color: data.colorPrincipal }}>{cert.emisor}</p>
+                                        {cert.credencial && <p className="text-xs text-gray-700 mt-1">ID: {cert.credencial}</p>}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {data.voluntariado?.length > 0 && (
+                        <section>
+                            <h2 className="text-3xl font-black mb-6" style={{ color: data.colorPrincipal }}>{t.volunteer}</h2>
+                            <div className="space-y-4">
+                                {data.voluntariado.map((vol) => (
+                                    <div key={vol.id} className="bg-gray-50 p-5 rounded-xl border-2 border-gray-100">
+                                        <h3 className="text-lg font-bold mb-1">{vol.rol}</h3>
+                                        <p className="text-xs text-gray-500 mb-2">{vol.fecha}</p>
+                                        <p className="text-sm font-bold" style={{ color: data.colorPrincipal }}>{vol.organizacion}</p>
+                                        {vol.descripcion && <p className="text-sm text-gray-700 mt-2">{vol.descripcion}</p>}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {data.premios?.length > 0 && (
+                        <section>
+                            <h2 className="text-3xl font-black mb-6" style={{ color: data.colorPrincipal }}>{t.awards}</h2>
+                            <div className="space-y-4">
+                                {data.premios.map((premio) => (
+                                    <div key={premio.id} className="bg-gray-50 p-5 rounded-xl border-2 border-gray-100">
+                                        <h3 className="text-lg font-bold mb-1">{premio.titulo}</h3>
+                                        <p className="text-xs text-gray-500 mb-2">{premio.fecha}</p>
+                                        <p className="text-sm font-bold" style={{ color: data.colorPrincipal }}>{premio.emisor}</p>
+                                        {premio.descripcion && <p className="text-sm text-gray-700 mt-2">{premio.descripcion}</p>}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
                 </main>
             </div>
         </div>

@@ -111,6 +111,60 @@ export const MinimalTemplate = ({ data, t }) => {
                     </div>
                 </section>
             )}
+
+            {data.certificaciones?.length > 0 && (
+                <section className="mb-10">
+                    <h2 className="text-2xl font-light mb-6 pb-2 border-b" style={{ color: data.colorPrincipal }}>{t.certifications}</h2>
+                    <div className="space-y-4">
+                        {data.certificaciones.map((cert) => (
+                            <div key={cert.id} className="flex justify-between items-start">
+                                <div>
+                                    <h3 className="font-semibold">{cert.nombre}</h3>
+                                    <p className="text-sm text-gray-700">{cert.emisor}</p>
+                                    {cert.credencial && <p className="text-xs text-gray-500 mt-1">ID: {cert.credencial}</p>}
+                                </div>
+                                <span className="text-sm text-gray-500 italic whitespace-nowrap ml-4">{cert.fecha}</span>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
+
+            {data.voluntariado?.length > 0 && (
+                <section className="mb-10">
+                    <h2 className="text-2xl font-light mb-6 pb-2 border-b" style={{ color: data.colorPrincipal }}>{t.volunteer}</h2>
+                    <div className="space-y-4">
+                        {data.voluntariado.map((vol) => (
+                            <div key={vol.id}>
+                                <div className="flex justify-between items-start mb-1">
+                                    <h3 className="font-semibold">{vol.rol}</h3>
+                                    <span className="text-sm text-gray-500 italic whitespace-nowrap ml-4">{vol.fecha}</span>
+                                </div>
+                                <p className="text-sm text-gray-700">{vol.organizacion}</p>
+                                {vol.descripcion && <p className="text-sm text-gray-600 mt-1">{vol.descripcion}</p>}
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
+
+            {data.premios?.length > 0 && (
+                <section className="mb-10">
+                    <h2 className="text-2xl font-light mb-6 pb-2 border-b" style={{ color: data.colorPrincipal }}>{t.awards}</h2>
+                    <div className="space-y-4">
+                        {data.premios.map((premio) => (
+                            <div key={premio.id}>
+                                <div className="flex justify-between items-start mb-1">
+                                    <h3 className="font-semibold">{premio.titulo}</h3>
+                                    <span className="text-sm text-gray-500 italic whitespace-nowrap ml-4">{premio.fecha}</span>
+                                </div>
+                                <p className="text-sm text-gray-700">{premio.emisor}</p>
+                                {premio.descripcion && <p className="text-sm text-gray-600 mt-1">{premio.descripcion}</p>}
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
         </div>
     );
 };

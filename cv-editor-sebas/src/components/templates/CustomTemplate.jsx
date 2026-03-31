@@ -212,6 +212,69 @@ export const CustomTemplate = ({ data, t }) => {
                             </section>
                         )}
 
+                        {/* Certificaciones */}
+                        {data.certificaciones?.length > 0 && (
+                            <section>
+                                <h2 className="text-xl font-bold uppercase tracking-wider mb-4 border-b pb-2" style={{ borderColor: data.colorPrincipal, color: data.colorPrincipal }}>
+                                    {t.certifications}
+                                </h2>
+                                <div className="space-y-5">
+                                    {data.certificaciones.map(cert => (
+                                        <div key={cert.id}>
+                                            <div className="flex justify-between items-baseline mb-1">
+                                                <h3 className="text-lg font-bold">{cert.nombre}</h3>
+                                                <span className="text-sm font-semibold opacity-80">{cert.fecha}</span>
+                                            </div>
+                                            <p className="text-md font-medium opacity-90">{cert.emisor}</p>
+                                            {cert.credencial && <p className="text-xs opacity-70 mt-1">ID: {cert.credencial}</p>}
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+
+                        {/* Voluntariado */}
+                        {data.voluntariado?.length > 0 && (
+                            <section>
+                                <h2 className="text-xl font-bold uppercase tracking-wider mb-4 border-b pb-2" style={{ borderColor: data.colorPrincipal, color: data.colorPrincipal }}>
+                                    {t.volunteer}
+                                </h2>
+                                <div className="space-y-5">
+                                    {data.voluntariado.map(vol => (
+                                        <div key={vol.id}>
+                                            <div className="flex justify-between items-baseline mb-1">
+                                                <h3 className="text-lg font-bold">{vol.rol}</h3>
+                                                <span className="text-sm font-semibold opacity-80">{vol.fecha}</span>
+                                            </div>
+                                            <p className="text-md font-medium mb-1 opacity-90">{vol.organizacion}</p>
+                                            {vol.descripcion && <p className="text-sm opacity-90">{vol.descripcion}</p>}
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+
+                        {/* Premios */}
+                        {data.premios?.length > 0 && (
+                            <section>
+                                <h2 className="text-xl font-bold uppercase tracking-wider mb-4 border-b pb-2" style={{ borderColor: data.colorPrincipal, color: data.colorPrincipal }}>
+                                    {t.awards}
+                                </h2>
+                                <div className="space-y-5">
+                                    {data.premios.map(premio => (
+                                        <div key={premio.id}>
+                                            <div className="flex justify-between items-baseline mb-1">
+                                                <h3 className="text-lg font-bold">{premio.titulo}</h3>
+                                                <span className="text-sm font-semibold opacity-80">{premio.fecha}</span>
+                                            </div>
+                                            <p className="text-md font-medium mb-1 opacity-90">{premio.emisor}</p>
+                                            {premio.descripcion && <p className="text-sm opacity-90">{premio.descripcion}</p>}
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+
                     </div>
                 </main>
             </div>

@@ -73,6 +73,54 @@ export const TechTemplate = ({ data, t }) => {
                         </div>
                     </div>
                 )}
+
+                {data.certificaciones?.length > 0 && (
+                    <div className="bg-gray-800 p-6 rounded-lg border border-cyan-500/30">
+                        <div className="text-cyan-400 text-sm mb-4">$ ls -la certifications/</div>
+                        <div className="space-y-4">
+                            {data.certificaciones.map((cert) => (
+                                <div key={cert.id} className="border-l-2 border-cyan-500 pl-4">
+                                    <div className="text-lg font-bold text-white">{cert.nombre}</div>
+                                    <div className="text-cyan-400 text-sm">{cert.emisor}</div>
+                                    <div className="text-gray-500 text-xs mb-1">{cert.fecha}</div>
+                                    {cert.credencial && <div className="text-gray-400 text-xs">ID: {cert.credencial}</div>}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {data.voluntariado?.length > 0 && (
+                    <div className="bg-gray-800 p-6 rounded-lg border border-cyan-500/30">
+                        <div className="text-cyan-400 text-sm mb-4">$ cat volunteer.log</div>
+                        <div className="space-y-4">
+                            {data.voluntariado.map((vol) => (
+                                <div key={vol.id} className="border-l-2 border-cyan-500 pl-4">
+                                    <div className="text-lg font-bold text-white">{vol.rol}</div>
+                                    <div className="text-cyan-400 text-sm">{vol.organizacion}</div>
+                                    <div className="text-gray-500 text-xs mb-2">{vol.fecha}</div>
+                                    {vol.descripcion && <div className="text-sm text-gray-300">→ {vol.descripcion}</div>}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {data.premios?.length > 0 && (
+                    <div className="bg-gray-800 p-6 rounded-lg border border-cyan-500/30">
+                        <div className="text-cyan-400 text-sm mb-4">$ grep awards ~/.profile</div>
+                        <div className="space-y-4">
+                            {data.premios.map((premio) => (
+                                <div key={premio.id} className="border-l-2 border-cyan-500 pl-4">
+                                    <div className="text-lg font-bold text-white">{premio.titulo}</div>
+                                    <div className="text-cyan-400 text-sm">{premio.emisor}</div>
+                                    <div className="text-gray-500 text-xs mb-2">{premio.fecha}</div>
+                                    {premio.descripcion && <div className="text-sm text-gray-300">→ {premio.descripcion}</div>}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

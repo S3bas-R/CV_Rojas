@@ -203,6 +203,7 @@ export default function CVEditor() {
             padding: 0 !important;
             margin: 0 !important;
             width: 100% !important;
+            display: block !important;
           }
           
           /* Contenedor del CV */

@@ -15,7 +15,7 @@ export const translations = {
         skills: { title: "Habilidades Técnicas", add: "Añadir", name: "Habilidad", level: "Nivel", softSkills: "Habilidades Blandas" },
         projects: { title: "Proyectos", add: "Añadir", name: "Nombre", date: "Fecha", description: "Descripción", technologies: "Tecnologías" },
         design: { title: "Personalización", uploadPhoto: "Subir Foto", photoUrl: "URL imagen", primaryColor: "Color", template: "Plantilla", professional: "Profesional", modern: "Moderno", minimal: "Minimalista", exportPDF: "Exportar PDF", resetAll: "Resetear", autoSave: "Auto-guardado", autoSaveDesc: "Cambios guardados automáticamente", languages: "Idiomas", addLanguage: "+ Añadir", language: "Idioma", languageLevel: "Nivel" },
-        cv: { contact: "Contacto", languages: "Idiomas", availability: "Disponibilidad", hobbies: "Hobbies", softSkills: "Soft Skills", profile: "Perfil", experience: "Experiencia", education: "Educación", technicalSkills: "Habilidades", projects: "Proyectos", technologies: "Tecnologías" }
+        cv: { contact: "Contacto", languages: "Idiomas", availability: "Disponibilidad", hobbies: "Hobbies", softSkills: "Soft Skills", profile: "Perfil", experience: "Experiencia", education: "Educación", technicalSkills: "Habilidades", projects: "Proyectos", technologies: "Tecnologías", certifications: "Certificaciones", volunteer: "Voluntariado", awards: "Premios" }
     },
     en: {
         editorTitle: "CV Creator",
@@ -27,6 +27,6 @@ export const translations = {
         skills: { title: "Technical Skills", add: "Add", name: "Skill", level: "Level", softSkills: "Soft Skills" },
         projects: { title: "Projects", add: "Add", name: "Name", date: "Date", description: "Description", technologies: "Technologies" },
         design: { title: "Customization", uploadPhoto: "Upload Photo", photoUrl: "Image URL", primaryColor: "Color", template: "Template", professional: "Professional", modern: "Modern", minimal: "Minimal", exportPDF: "Export PDF", resetAll: "Reset", autoSave: "Auto-save", autoSaveDesc: "Changes saved automatically", languages: "Languages", addLanguage: "+ Add", language: "Language", languageLevel: "Level" },
-        cv: { contact: "Contact", languages: "Languages", availability: "Availability", hobbies: "Hobbies", softSkills: "Soft Skills", profile: "Profile", experience: "Experience", education: "Education", technicalSkills: "Skills", projects: "Projects", technologies: "Technologies" }
+        cv: { contact: "Contact", languages: "Languages", availability: "Availability", hobbies: "Hobbies", softSkills: "Soft Skills", profile: "Profile", experience: "Experience", education: "Education", technicalSkills: "Skills", projects: "Projects", technologies: "Technologies", certifications: "Certifications", volunteer: "Volunteer Work", awards: "Awards" }
     }
 };
